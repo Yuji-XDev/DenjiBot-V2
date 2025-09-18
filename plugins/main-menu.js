@@ -3,9 +3,9 @@ import moment from 'moment-timezone'
 import speed from 'performance-now'
 
 let handler = async (m, { conn }) => {
-  let mentionedJid = await m.mentionedJid
-  let userId = mentionedJid && mentionedJid[0] ? mentionedJid[0] : m.sender
+  let mentionedJid = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
   let totalCommands = Object.keys(global.plugins).length
+  
   // ⏳ ping
   let timestamp = speed()
   let ping = (speed() - timestamp).toFixed(2)
@@ -25,7 +25,7 @@ let handler = async (m, { conn }) => {
 
   let menu = `   ⟢ SYSTEM ONLINE: 「Denji Bot V2」
 
-[👤] Usuario: @${userId.split('@')[0]},
+[👤] Usuario: @${mentionedJid.split('@')[0]}
 [📚] Comandos: ${totalCommands}
 [⚙️] Versión: ${vs}
 [🛠️] Librería: ${libreria}
@@ -34,8 +34,8 @@ let handler = async (m, { conn }) => {
 
 ─── SYSTEM STATUS ───
 [💾] RAM Total: ${total} MB
-[📈] RAM Usada: ${free} MB
-[📉] RAM Libre: ${used} MB
+[📈] RAM Usada: ${used} MB
+[📉] RAM Libre: ${free} MB
 [🌿] Ping: *${ping} ms*
 
 ─── DATE & TIME ───
@@ -298,28 +298,30 @@ let handler = async (m, { conn }) => {
 *┊* ᠙᳞✿᮫ְׅ᳝࣪᪲࣪☪ *#xvideos •#xvideosdl* + [Link]
 *┊* ᠙᳞✿᮫ְׅ᳝࣪᪲࣪☪ *#xnxx •#xnxxdl* + [Link]
 *╰───────────┅≡*ׅ
-`.trim()
-await conn.sendMessage(m.chat, { 
-text: menu,
-contextInfo: {
-mentionedJid: [userId],
-isForwarded: true,
-forwardedNewsletterMessageInfo: {
-newsletterJid: channelRD.id,
-serverMessageId: '',
-newsletterName: channelRD.name
-},
-externalAdReply: {
-title: botname,
-body: textbot,
-mediaType: 1,
-mediaUrl: redes,
-sourceUrl: redes,
-thumbnail: banner,
-showAdAttribution: false,
-containsAutoReply: true,
-renderLargerThumbnail: true
-}}}, { quoted: m })
+`
+
+  await conn.sendMessage(m.chat, { 
+    text: menu,
+    contextInfo: {
+      mentionedJid: [mentionedJid],
+      isForwarded: true,
+      forwardedNewsletterMessageInfo: {
+        newsletterJid: channelRD.id,
+        serverMessageId: '',
+        newsletterName: channelRD.name
+      },
+      externalAdReply: {
+        title: botname,
+        body: textbot,
+        mediaType: 1,
+        mediaUrl: redes,
+        sourceUrl: redes,
+        thumbnailUrl: 'https://i.pinimg.com/originals/e0/98/ba/e098bac73c8ae72243f66c7bf712045a.jpg',
+        showAdAttribution: false,
+        renderLargerThumbnail: true
+      }
+    }
+  }, { quoted: m })
 }
 
 handler.help = ['menu']
