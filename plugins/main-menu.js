@@ -300,7 +300,7 @@ let handler = async (m, { conn }) => {
 *╰───────────┅≡*ׅ
 `.trim()
 await conn.sendMessage(m.chat, { 
-text: txt,
+text: menu,
 contextInfo: {
 mentionedJid: [userId],
 isForwarded: true,
