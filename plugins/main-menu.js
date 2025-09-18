@@ -33,9 +33,9 @@ let handler = async (m, { conn }) => {
 [🌤️] Uptime: ${uptime}
 
 ─── SYSTEM STATUS ───
-[💾] RAM Total: ${totalMem} MB
-[📈] RAM Usada: ${usedMem} MB
-[📉] RAM Libre: ${freeMem} MB
+[💾] RAM Total: ${total} MB
+[📈] RAM Usada: ${free} MB
+[📉] RAM Libre: ${used} MB
 [🌿] Ping: *${ping} ms*
 
 ─── DATE & TIME ───
