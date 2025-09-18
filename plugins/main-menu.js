@@ -5,6 +5,7 @@ import speed from 'performance-now'
 let handler = async (m, { conn }) => {
   let mentionedJid = await m.mentionedJid
   let userId = mentionedJid && mentionedJid[0] ? mentionedJid[0] : m.sender
+  let totalCommands = Object.keys(global.plugins).length
   // ⏳ ping
   let timestamp = speed()
   let ping = (speed() - timestamp).toFixed(2)
@@ -25,7 +26,6 @@ let handler = async (m, { conn }) => {
   let menu = `   ⟢ SYSTEM ONLINE: 「Denji Bot V2」
 
 [👤] Usuario: @${userId.split('@')[0]},
-[📊] Registrados: ${totalreg.toLocaleString()}
 [📚] Comandos: ${totalCommands}
 [⚙️] Versión: ${vs}
 [🛠️] Librería: ${libreria}
